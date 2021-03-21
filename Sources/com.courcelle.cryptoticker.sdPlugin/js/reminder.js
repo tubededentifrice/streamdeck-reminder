@@ -14,6 +14,7 @@ const parsedCrons = {};
 
 const defaultSettings = {
     "title": "Reminder",
+    "fontSize": "30",
     "dow": "*",
     "dom": "*",
     "month": "*",
@@ -297,7 +298,7 @@ const reminderAction = {
         canvasContext.fillStyle = backgroundColor;
         canvasContext.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        fontSize = 30;
+        fontSize = parseInt(settings["fontSize"]);
         lineHeight = fontSize + 5;
 
         var font = settings["font"] || "Lato";
@@ -307,7 +308,7 @@ const reminderAction = {
         canvasContext.textAlign = "center";
         const lines = settings["title"].split("\n");
 
-        let topIndex = Math.round(canvasHeight/2 - lines.length/2*lineHeight + fontSize);
+        let topIndex = Math.round(canvasHeight/2 - lines.length/2*lineHeight + fontSize*0.88);
         for (var i = 0; i<lines.length; i++) {
             canvasContext.fillText(lines[i], canvasWidth/2, topIndex);
             topIndex += lineHeight;

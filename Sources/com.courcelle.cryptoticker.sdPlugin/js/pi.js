@@ -30,6 +30,10 @@ const settingsConfig = {
         "default": "Reminder",
         "value": document.getElementById("input-title")
     },
+    "fontSize": {
+        "default": "30",
+        "value": document.getElementById("input-fontsize")
+    },
     "dow": {
         "default": "*",
         "value": document.getElementById("select-dow"),
