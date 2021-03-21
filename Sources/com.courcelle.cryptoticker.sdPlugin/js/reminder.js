@@ -329,7 +329,7 @@ const reminderAction = {
         websocket.send(JSON.stringify(json));
     },
 
-    isInAlarm: function(context, settings) {
+    isInAlarm: function(context, settings, forceUpdate = false) {
         if (settings["isInAlarm"]=="on") {
             return true;
         }
@@ -340,12 +340,11 @@ const reminderAction = {
         if (this.hasMatches(sinceTime, nowTime, parsedCrons[context])) {
             settings["isInAlarm"] = "on";
             settings["lastAlarmCheck"] = nowTime;
-
             this.updateSettings(context, settings);
             return true;
         }
 
-        if (nowTime - sinceTime>3600*1000) {
+        if (forceUpdate || nowTime - sinceTime>3600*1000) {
             settings["lastAlarmCheck"] = nowTime;
             this.updateSettings(context, settings);
         }
@@ -414,8 +413,7 @@ function connectElgatoStreamDeckSocket(inPort, pluginUUID, inRegisterEvent, inAp
             await reminderAction.onWillAppear(context, settings, coordinates);
         } else if (event == "willDisappear") {
             // Avoid checking again for nothing
-            settings["lastAlarmCheck"] = new Date().getTime();
-            reminderAction.updateSettings(context, settings);
+            reminderAction.isInAlarm(context, settings, true);
         } else if (settings!=null) {
             // console.log("Received settings", settings);
             reminderAction.refreshSettings(context, settings);
