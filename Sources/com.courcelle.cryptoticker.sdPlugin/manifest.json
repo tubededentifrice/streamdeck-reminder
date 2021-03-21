@@ -1,0 +1,40 @@
+{
+  "Actions": [
+    {
+      "Icon": "images/actionIcon",
+      "Name": "Reminder",
+      "States": [
+        {
+          "Image": "images/actionDefaultImage",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "Tooltip": "Reminders to get an alert at regular intervals",
+      "UUID": "com.courcelle.reminder.remind"
+    }
+  ],
+  "SDKVersion": 2,
+  "Author": "Vincent Courcelle",
+  "CodePath": "index.html",
+  "PropertyInspectorPath": "index_pi.html",
+  "Name": "Reminder",
+  "Description": "This lets you define reminders to get an alert at regular intervals",
+  "Icon": "images/pluginIcon",
+  "URL": "https://github.com/tubededentifrice/streamdeck-reminder",
+  "Version": "1.0.0",
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.12"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Software": {
+    "MinimumVersion": "4.1"
+  }
+}
