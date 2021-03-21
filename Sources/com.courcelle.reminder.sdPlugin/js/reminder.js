@@ -360,6 +360,11 @@ const reminderAction = {
         const nowTime = new Date().getTime();
         const sinceTime = settings["lastAlarmCheck"];
 
+        if (nowTime<sinceTime) {
+            forceUpdate = true; // So next check will be fine
+            sinceTime = nowTime;
+        }
+
         if (this.hasMatches(sinceTime, nowTime, parsedCrons[context])) {
             settings["isInAlarm"] = "on";
             settings["lastAlarmCheck"] = nowTime;
