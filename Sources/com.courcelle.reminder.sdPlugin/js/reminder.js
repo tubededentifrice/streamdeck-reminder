@@ -82,7 +82,6 @@ const reminderAction = {
         };
 
         this.log(cron);
-        console.log(cron);
         parsedCrons[context] = cron;
     },
     parseItem: function(item) {
@@ -130,7 +129,7 @@ const reminderAction = {
             return;
         }
 
-        console.log("hasMatches", fromTime, toTime, cron);
+        // console.log("hasMatches", fromTime, toTime, (toTime - fromTime)/1000, cron);
 
         const getOrDefault = function(val, def) {
             if (val=="*") {
@@ -159,11 +158,12 @@ const reminderAction = {
         const outOfRange = function(date, upToFuture) {
             totalCounts++;
             const t = date.getTime();
-            if ((t + upToFuture*1000)<fromTime || t>toTime) {
-                //console.log("Out of range", date, upToFuture);
-                return true;
+            if (fromTime<=(t + upToFuture*1000) && t<=toTime) {
+                return false;
             }
-            return false;
+
+            // console.log("Out of range", date, upToFuture);
+            return true;
         };
 
         //console.log("years", years);
@@ -215,24 +215,36 @@ const reminderAction = {
                             //console.log("Checking", fromDate);
                             checksCount++;
                             if (this.cronMatches(fromDate, cron)) {
-                                console.log("Performed "+checksCount+" checks before successful, and " + totalCounts + " loops");
+                                // console.log("Performed "+checksCount+" checks before successful, and " + totalCounts + " loops", fromDate);
                                 return true;
                             }
 
+                            if (fromDate.getTime()>toTime) {
+                                break;
+                            }
                             fromDate.setMinutes(0);
                         }
 
+                        if (fromDate.getTime()>toTime) {
+                            break;
+                        }
                         fromDate.setHours(0);
                     }
 
+                    if (fromDate.getTime()>toTime) {
+                        break;
+                    }
                     fromDate.setDate(1);
                 }
 
+                if (fromDate.getTime()>toTime) {
+                    break;
+                }
                 fromDate.setMonth(0);
             }
         }
 
-        console.log("Performed "+checksCount+" unsuccessful checks and " + totalCounts + " loops");
+        // console.log("Performed "+checksCount+" unsuccessful checks and " + totalCounts + " loops");
         return false;
     },
 
