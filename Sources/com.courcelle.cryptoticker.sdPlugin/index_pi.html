@@ -14,7 +14,7 @@
     <div class="sdpi-wrapper">
         <div class="sdpi-item">
             <div class="sdpi-item-label">Reminder</div>
-            <input type="text" class="sdpi-item-value" id="input-title" name="input-title" value="">
+            <textarea class="sdpi-item-value" id="input-title" name="input-title" value=""></textarea>
         </div>
 
         <div class="sdpi-item">
@@ -31,6 +31,14 @@
         </div>
         <details>
             <p>Comma separated list of minutes to trigger, eg. <em>15,30,45</em></p>
+        </details>
+
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Day of the month</div>
+            <input type="text" class="sdpi-item-value" id="input-dom" name="input-dom" placeholder="Example: 1,15">
+        </div>
+        <details>
+            <p>Comma separated list of day of the month to trigger, eg. <em>1,15</em></p>
         </details>
 
         <div class="sdpi-item">

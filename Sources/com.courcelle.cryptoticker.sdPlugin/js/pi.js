@@ -27,7 +27,7 @@ function setValueMultiselect(ms, val) {
 const loggingEnabled = false;
 const settingsConfig = {
     "title": {
-        "default": "",
+        "default": "Reminder",
         "value": document.getElementById("input-title")
     },
     "dow": {
@@ -39,6 +39,10 @@ const settingsConfig = {
         "setValue": function(val) {
             setValueMultiselect(this.value, val);
         }
+    },
+    "dom": {
+        "default": "*",
+        "value": document.getElementById("input-dom")
     },
     "month": {
         "default": "*",
@@ -57,7 +61,16 @@ const settingsConfig = {
     "minute": {
         "default": "0",
         "value": document.getElementById("input-minute")
-    }
+    },
+    "lastAck": {
+        "default": new Date().getTime()
+    },
+    "lastAlarmCheck": {
+        "default": new Date().getTime()
+    },
+    "isInAlarm": {
+        "default": "off"
+    },
 };
 
 const currentSettings = {};
