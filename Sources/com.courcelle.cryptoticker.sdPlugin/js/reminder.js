@@ -345,6 +345,11 @@ const reminderAction = {
             return true;
         }
 
+        if (nowTime - sinceTime>3600*1000) {
+            settings["lastAlarmCheck"] = nowTime;
+            this.updateSettings(context, settings);
+        }
+
         return false;
     },
 };
@@ -407,6 +412,10 @@ function connectElgatoStreamDeckSocket(inPort, pluginUUID, inRegisterEvent, inAp
             await reminderAction.onKeyUp(context, settings, coordinates, userDesiredState);
         } else if (event == "willAppear") {
             await reminderAction.onWillAppear(context, settings, coordinates);
+        } else if (event == "willDisappear") {
+            // Avoid checking again for nothing
+            settings["lastAlarmCheck"] = new Date().getTime();
+            reminderAction.updateSettings(context, settings);
         } else if (settings!=null) {
             // console.log("Received settings", settings);
             reminderAction.refreshSettings(context, settings);
