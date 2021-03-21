@@ -82,6 +82,7 @@ const reminderAction = {
         };
 
         this.log(cron);
+        console.log(cron);
         parsedCrons[context] = cron;
     },
     parseItem: function(item) {
@@ -97,6 +98,10 @@ const reminderAction = {
         return parsed;
     },
     cronMatches: function(date, cron) {
+        if (cron==null) {
+            return;
+        }
+
         if (cron["minute"]!="*" && cron["minute"].indexOf(date.getMinutes())<0) {
             //console.log("minute doesn't match", cron["minute"], date.getMinutes());
             return false;
@@ -121,6 +126,12 @@ const reminderAction = {
         return true;
     },
     hasMatches: function(fromTime, toTime, cron) {
+        if (cron==null) {
+            return;
+        }
+
+        console.log("hasMatches", fromTime, toTime, cron);
+
         const getOrDefault = function(val, def) {
             if (val=="*") {
                 return def;
@@ -411,10 +422,10 @@ function connectElgatoStreamDeckSocket(inPort, pluginUUID, inRegisterEvent, inAp
             await reminderAction.onKeyUp(context, settings, coordinates, userDesiredState);
         } else if (event == "willAppear") {
             await reminderAction.onWillAppear(context, settings, coordinates);
-        } else if (event == "willDisappear") {
+        } else if (event == "willDisappear" && settings) {
             // Avoid checking again for nothing
             reminderAction.isInAlarm(context, settings, true);
-        } else if (settings!=null) {
+        } else if (settings) {
             // console.log("Received settings", settings);
             reminderAction.refreshSettings(context, settings);
         }

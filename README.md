@@ -8,8 +8,7 @@
 - Click the button to disable the alert
 - Fully open source!
 
-<img src="https://github.com/tubededentifrice/streamdeck-reminder/raw/master/screenshot1.png" width="277" />
-<img src="https://github.com/tubededentifrice/streamdeck-reminder/raw/master/screenshot2.png" width="354" />
+<img src="https://github.com/tubededentifrice/streamdeck-reminder/raw/master/screenshot1.png" width="252" />
 
 ## Installation
 In the Release folder, you can find the file `com.courcelle.reminder.streamDeckPlugin`. If you double-click this file on your machine, Stream Deck will install the plugin.
